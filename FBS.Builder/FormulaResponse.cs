@@ -8,13 +8,13 @@ using System.Xml.Serialization;
 
 namespace FBS.Builder
 {
-    [XmlRoot("response", Namespace = "")]
+    [XmlRoot("response")]
     public class FormulaResponse
     {
-        [XmlElement("result", IsNullable = false)]
+        [XmlElement("result")]
         public string Result { get; set; }
 
-        [XmlElement("errors", IsNullable = false)]
+        [XmlElement("errors")]
         public Errors Errors { get; set; }
     }
 

@@ -1,0 +1,5 @@
+﻿<response>
+  <result>20 * (10 + (100 / 50))</result>
+  <errors>
+  </errors>
+</response>

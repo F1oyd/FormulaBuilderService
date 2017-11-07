@@ -81,24 +81,22 @@ namespace FBS.Builder
         private string BuildExpression(Expression expr)
         {
             var sb = new StringBuilder();
-            if (expr.Operands[0].Value != null)
-            {
-                sb.Append(expr.Operands[0].Value);
-            }
-            else if (expr.Operands[0].Expression != null)
-            {
-                sb.Append($"({this.BuildExpression(expr.Operands[0].Expression)})");
-            }
+            AppendOperand(sb, expr.Operands[0]);
             sb.Append($" {availableOperations[expr.Operation]} ");
-            if (expr.Operands[1].Value != null)
-            {
-                sb.Append(expr.Operands[1].Value);
-            }
-            else if (expr.Operands[1].Expression != null)
-            {
-                sb.Append($"({this.BuildExpression(expr.Operands[1].Expression)})");
-            }
+            AppendOperand(sb, expr.Operands[1]);
             return sb.ToString();
+        }
+
+        private void AppendOperand(StringBuilder sb, Operand operand)
+        {
+            if (operand.Value != null)
+            {
+                sb.Append(operand.Value);
+            }
+            else if (operand.Expression != null)
+            {
+                sb.Append($"({this.BuildExpression(operand.Expression)})");
+            }
         }
 
         private string[] ValidateExpression(Expression expr)

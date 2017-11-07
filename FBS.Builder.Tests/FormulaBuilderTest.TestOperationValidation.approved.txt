@@ -1,0 +1,7 @@
+﻿<response>
+  <result>
+  </result>
+  <errors>
+    <error>Unknown operator: bla</error>
+  </errors>
+</response>
