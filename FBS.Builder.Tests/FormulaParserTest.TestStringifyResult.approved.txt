@@ -1,0 +1,5 @@
+﻿<response>
+  <result>20 + (10 - 5)</result>
+  <errors>
+  </errors>
+</response>

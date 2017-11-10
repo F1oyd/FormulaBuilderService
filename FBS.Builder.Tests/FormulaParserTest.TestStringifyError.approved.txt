@@ -1,0 +1,8 @@
+﻿<response>
+  <result>
+  </result>
+  <errors>
+    <error>Error1</error>
+    <error>Error2</error>
+  </errors>
+</response>

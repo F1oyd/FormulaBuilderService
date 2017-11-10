@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using ApprovalTests;
+using ApprovalTests.Reporters;
 using DeepEqual.Syntax;
 using NUnit.Framework;
 
@@ -117,6 +119,51 @@ namespace FBS.Builder.Tests
 
             // Assert
             Assert.Throws<InvalidOperationException>(() => parser.Parse<FormulaRequest>(input));
+        }
+
+        [Test]
+        [UseReporter(typeof(VisualStudioReporter))]
+        public void TestStringifyResult()
+        {
+            // Arrange
+            var input = new FormulaResponse
+            {
+                Result = "20 + (10 - 5)",
+                Errors = new Errors()
+            };
+
+            // Act
+            var parser = new XmlParser();
+            var result = parser.Stringify(input);
+
+            // Assert
+            Approvals.Verify(result);
+        }
+
+        [Test]
+        [UseReporter(typeof(VisualStudioReporter))]
+        public void TestStringifyError()
+        {
+            // Arrange
+            var input = new FormulaResponse
+            {
+                Result = string.Empty,
+                Errors = new Errors
+                {
+                    Error = new string[]
+                    {
+                        "Error1",
+                        "Error2"
+                    }
+                }
+            };
+
+            // Act
+            var parser = new XmlParser();
+            var result = parser.Stringify(input);
+
+            // Assert
+            Approvals.Verify(result);
         }
     }
 }
