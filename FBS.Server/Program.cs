@@ -44,7 +44,7 @@ namespace FBS.Server
         {
             Console.WriteLine("Client connected: {0}", client.RemoteEndPoint);
             client.Received += (c, r) => Console.WriteLine("← Request received: {0} from client {1}", r, client.RemoteEndPoint);
-            client.Sended += (c, r) => Console.WriteLine("→ Response sent: {0} to client {1}", r, client.RemoteEndPoint);
+            client.Sent += (c, r) => Console.WriteLine("→ Response sent: {0} to client {1}", r, client.RemoteEndPoint);
 
             while (client.IsConnected)
             {

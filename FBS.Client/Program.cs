@@ -23,12 +23,12 @@ namespace FBS.Client
 
                 if (string.IsNullOrEmpty(request)) continue;
 
-                byte[] requestBytes = Encoding.Default.GetBytes(request);
+                byte[] requestBytes = Encoding.UTF8.GetBytes(request);
                 client.GetStream().Write(requestBytes, 0, requestBytes.Length);
 
                 byte[] buffer = new byte[102400];
                 int i = client.GetStream().Read(buffer, 0, buffer.Length);
-                string response = Encoding.Default.GetString(buffer, 0, i);
+                string response = Encoding.UTF8.GetString(buffer, 0, i);
 
                 Console.WriteLine(response);
             }

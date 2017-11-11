@@ -65,7 +65,7 @@ namespace FBS.Server
             return bytes;
         }
 
-        public event SentEventHandler Sended;
+        public event SentEventHandler Sent;
         public void SendString(string str, Encoding encoding)
         {
             if (!this.Client.Connected) return;
@@ -80,7 +80,7 @@ namespace FBS.Server
                 this.Disconnect();
                 return;
             }
-            Sended?.Invoke(this, str);
+            Sent?.Invoke(this, str);
         }
         public void SendBytes(byte[] bytes)
         {
@@ -95,7 +95,7 @@ namespace FBS.Server
                 this.Disconnect();
                 return;
             }
-            Sended?.Invoke(this, bytes);
+            Sent?.Invoke(this, bytes);
         }
 
         public event DisconnectedEventHandler ClientDisconnected;
