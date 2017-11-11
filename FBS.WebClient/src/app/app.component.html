@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-form-field>
+        <input matInput placeholder="Server Address" [(ngModel)]="server">
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="toggleConnect()">{{connected ? 'Disconnect' : 'Connect'}}</button>
+    <mat-form-field>
+        <textarea matInput placeholder="Request" [(ngModel)]="request" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="20"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="btnClick()">Submit</button>
+    <mat-form-field>
+        <textarea matInput placeholder="Response" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="20" disabled></textarea>
+    </mat-form-field>
+</mat-card>
