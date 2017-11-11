@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 using System.Text;
 using System.Windows;
 
@@ -40,17 +41,31 @@ namespace FBS.WpfClient
             }
             else
             {
-                SendMessage("DisconnectEvent");
-                _client.Close();
+                try
+                {
+                    SendMessage("DisconnectEvent");
+                    _client.Close();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
                 _viewModel.IsConnected = false;
             }
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage(_viewModel.RequestString);
-
-            _viewModel.ResponseString = ReceiveMessage();
+            try
+            {
+                SendMessage(_viewModel.RequestString);
+                _viewModel.ResponseString = ReceiveMessage();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+                _viewModel.IsConnected = false;
+            }
         }
 
         private void SendMessage(string message)

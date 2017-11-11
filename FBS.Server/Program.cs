@@ -31,11 +31,36 @@ namespace FBS.Server
                 }
                 if (input.Equals("clients"))
                 {
-                    tcpServer.ConnectedClients.ForEach(client => Console.WriteLine(client.RemoteEndPoint));
+                    for (int i = 0; i < tcpServer.ConnectedClients.Count; i++)
+                    {
+                        Console.WriteLine("Client {0}: {1}", i, tcpServer.ConnectedClients[i].RemoteEndPoint);
+                    }
                 }
                 if (input.StartsWith("disconnect"))
                 {
-                    tcpServer.ConnectedClients[int.Parse(input.Split(' ')[1])].Disconnect();
+                    var prms = input.Split();
+                    if (prms.Length > 1)
+                    {
+                        if (int.TryParse(prms[1], out int clinetIndex))
+                        {
+                            if (tcpServer.ConnectedClients.Count > clinetIndex)
+                            {
+                                tcpServer.ConnectedClients[clinetIndex].Disconnect();
+                            }
+                            else
+                            {
+                                Console.WriteLine("There is no client with index {0}.", clinetIndex);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong client index value {0}.", prms[1]);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Client index was not provided.");
+                    }
                 }
             } while (!exitOrder);
         }
